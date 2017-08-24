@@ -196,7 +196,7 @@ Sub Click(Source As Button)
         strbest = Join(fbest, Chr(13))
         strwt = Join(fwt, Chr(13))
         'concatenate the strings together into a variable and set the field value on the child doc.
-        strginfo = "Strategic Priority: " & strpill & Chr(13) & Chr(13) & "Good: " & strgood & Chr(13) & Chr(13) & "Better: " & strbetter & Chr(13) & Chr(13) & "Best: " & strbest & Chr(13) & Chr(13)  & "Weight: " & strwt 
+        strginfo = "Strategic Priority: " & strpill & Chr(13) & Chr(13) & "Good: " & strgood & Chr(13) & Chr(13) & "Better: " & strbetter & Chr(13) & Chr(13) & "Best: " & strbest & Chr(13) & Chr(13)  & "Weight: " & strwt
         Set fginfo = evaldoc.ReplaceItemValue(ginfo, strginfo)
         'now increment each counter
         ctrpopgoal = ctrpopgoal + 1
