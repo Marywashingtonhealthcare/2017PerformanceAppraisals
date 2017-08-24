@@ -130,7 +130,7 @@ Sub Click(Source As Button)
         Call selfEval.Save(False,False)
 
         ' Send Email
-        Call  sendMail(address,findSelfEvalUnid,"Self Evaluation Modification for - "+FirstName+" "+Lastname +"  * Attention Needed","Please re-evaluate the Goals and Competencies as they have changed.") 
+        Call  sendMail(address,findSelfEvalUnid,"Self Evaluation Modification for - "+FirstName+" "+Lastname +"  * Attention Needed","Please re-evaluate the Goals and Competencies as they have changed.")
     End If
 
 End Sub

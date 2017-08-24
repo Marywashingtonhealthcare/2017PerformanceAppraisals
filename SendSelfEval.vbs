@@ -138,7 +138,7 @@ Sub Click(Source As Button)
     '*********************************************************(End Readers Field Creation Code)**************
 
     Set evaldoc = db.CreateDocument
-    evaldoc.form = "selfEvalAssoc16"
+    evaldoc.form = "selfEvalAssoc17"
     evaldoc.flagEval = "New"
     evaldoc.FirstName = uidoc.Document.FirstName
     evaldoc.LastName = uidoc.Document.LastName
@@ -234,21 +234,21 @@ Sub Click(Source As Button)
     url = evaldoc.docUrl
     urlint = evaldoc.docUrlint
 
-    Dim mdoc As NotesDocument 
-    Dim body As NotesMIMEEntity 
-    Dim header As NotesMIMEHeader 
-    Dim stream As NotesStream 
-    Set db = s.CurrentDatabase 
-    Set stream = s.CreateStream 
-    s.ConvertMIME = False ' Do not convert MIME to rich text 
+    Dim mdoc As NotesDocument
+    Dim body As NotesMIMEEntity
+    Dim header As NotesMIMEHeader
+    Dim stream As NotesStream
+    Set db = s.CurrentDatabase
+    Set stream = s.CreateStream
+    s.ConvertMIME = False ' Do not convert MIME to rich text
     Dim subtext As String
     subtext = evaldoc.FirstName(0) + " " + evaldoc.LastName(0)
-    Set mdoc = db.CreateDocument 
-    mdoc.Form = "Memo" 
+    Set mdoc = db.CreateDocument
+    mdoc.Form = "Memo"
     mdoc.Subject = "Self Evaluation for " + subtext
     mdoc.SendTo = email(0)
-    Set body = mdoc.CreateMIMEEntity 
-    Call stream.writetext(|<html>|) 	
+    Set body = mdoc.CreateMIMEEntity
+    Call stream.writetext(|<html>|)
     Call stream.writetext(|<body style="font-family: Arial, Helvetica, sans-serif;"><strong> Please fill out the following Self-Evaluation for your Performance Appraisal by clicking on one of the links below:</strong>|) 
     Call stream.WriteText(|<h4><a href=|)
     Call stream.writetext(|"| & urlint(0) &|"|)
@@ -256,11 +256,11 @@ Sub Click(Source As Button)
     Call stream.WriteText(|<a href=|)
     Call stream.writetext(|"| & url(0) &|"|)
     Call stream.WriteText(| style="margin-left:7px;">Home</a></h4><br>|)
-    Call stream.writetext(|<h5>PLEASE DO NOT DELETE THIS EMAIL: </h5>If you need to access your Self Eval again, you will need the link in this email.</body>|) 
-    Call stream.writetext(|</html>|) 
-    Call body.SetContentFromText(stream, "text/HTML;charset=UTF-8", ENC_IDENTITY_7BIT) 
-    Call mdoc.Send(False) 
-    s.ConvertMIME = True ' Restore conversion - very important 
+    Call stream.writetext(|<h5>PLEASE DO NOT DELETE THIS EMAIL: </h5>If you need to access your Self Eval again, you will need the link in this email.</body>|)
+    Call stream.writetext(|</html>|)
+    Call body.SetContentFromText(stream, "text/HTML;charset=UTF-8", ENC_IDENTITY_7BIT)
+    Call mdoc.Send(False)
+    s.ConvertMIME = True ' Restore conversion - very important
 
 
     mbend = Msgbox ("Thank you. Self Eval has been sent to "  + subtext +  " using the email address you provided." + Chr(13) + Chr(13) + "CLOSE THIS APPRAISAL?", 4+64+256+0, "Self Eval Send Successful!")
