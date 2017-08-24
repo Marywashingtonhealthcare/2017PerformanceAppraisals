@@ -156,19 +156,19 @@ Sub Click(Source As Button)
     Set saveoptions = New NotesItem(evaldoc, "SaveOptions","1")
 
     'The following code adds the Goals field data to the evaluation *********
-    Dim ctrpopgoal, ctractgoal, ctrginfo, ctrpill, ctrthresh, ctrstr, ctract, ctrwt As Integer 'dim all counters
-    Dim popgoal, actgoal, ginfo, pill, thresh, stretch, act, wt As String
-    Dim factgoal, fpill, fthresh, fstretch, fact, fwt As Variant
+    Dim ctrpopgoal, ctractgoal, ctrginfo, ctrpill, ctrgood, ctrbetter, ctrbest, ctrwt As Integer 'dim all counters
+    Dim popgoal, actgoal, ginfo, pill, good, better, best, wt As String
+    Dim factgoal, fpill, fgood, fbetter, fbest, fwt As Variant
     Dim fpopgoal, fginfo As NotesItem
-    Dim strpill, strthresh, strstretch, stract, strwt As String
+    Dim strpill, strgood, strbetter, strbest, strwt As String
     Dim strginfo As String
     ctrpopgoal = 1 'populate goal text
     ctractgoal = 1 'actual goal text
     ctrginfo = 1 'populate goal info field
     ctrpill = 2 'actual pillar text
-    ctrthresh = 3 'actual threshold text
-    ctrstr = 4 'actual stretch text
-    ctract = 5 'actual actual text
+    ctrgood = 3 'actual good text
+    ctrbetter = 4 'actual better text
+    ctrbest = 5 'actual best text
     ctrwt = 1 'actual weight text
 
     While ctractgoal < 72
@@ -177,34 +177,35 @@ Sub Click(Source As Button)
         actgoal = "LM" & Cstr(ctractgoal)
         ginfo = "gInfo" & Cstr(ctrginfo)
         pill = "LM" & Cstr(ctrpill) 'this is now strategic priority
-        thresh = "LM" & Cstr(ctrthresh) 'repurpose this <to good>
-        stretch = "LM" & Cstr(ctrstr) 'repurpose this.<to better>
-        act = "LM" & Cstr(ctract) 'repurpose this <to best>
+        good = "LM" & Cstr(ctrgood) 'repurposed from "thresh"
+        better = "LM" & Cstr(ctrbetter) 'repurposed from "stretch"
+        best = "LM" & Cstr(ctrbest) 'repurposed from "actual"
         wt = "lmwt" & Cstr(ctrwt)
         'get values of fields on main document (these are arrays that must be converted to strings before they can be used)
         factgoal = doc.GetItemValue(actgoal)
         fpill = doc.GetItemValue(pill)
-        fthresh = doc.GetItemValue(thresh)
-        fstretch = doc.GetItemValue(stretch)
-        fact = doc.GetItemValue(act)
+        fgood = doc.GetItemValue(good)
+        fbetter = doc.GetItemValue(better)
+        fbest = doc.GetItemValue(best)
         fwt = doc.GetItemValue(wt)
         Set fpopgoal = evaldoc.ReplaceItemValue(popgoal, factgoal)'set goal text in child doc with goal text of main doc.
         'convert field values to usable strings using join function
         strpill = Join(fpill, Chr(13))
-        strthresh = Join(fthresh, Chr(13))
-        stract = Join(fact, Chr(13))
+        strgood = Join(fgood, Chr(13))
+        strbetter = Join(fbetter, Chr(13))
+        strbest = Join(fbest, Chr(13))
         strwt = Join(fwt, Chr(13))
         'concatenate the strings together into a variable and set the field value on the child doc.
-        strginfo = "Strategic Priority: " & strpill & Chr(13) & Chr(13) & "Good: " & strthresh & Chr(13) & Chr(13) & "Actual: " & stract & Chr(13) & Chr(13)  & "Weight: " & strwt 
+        strginfo = "Strategic Priority: " & strpill & Chr(13) & Chr(13) & "Good: " & strgood & Chr(13) & Chr(13) & "Better: " & strbetter & Chr(13) & Chr(13) & "Best: " & strbest & Chr(13) & Chr(13)  & "Weight: " & strwt 
         Set fginfo = evaldoc.ReplaceItemValue(ginfo, strginfo)
         'now increment each counter
         ctrpopgoal = ctrpopgoal + 1
         ctractgoal = ctractgoal + 5
         ctrginfo = ctrginfo + 1
         ctrpill = ctrpill + 5
-        ctrthresh = ctrthresh + 5
-        ctrstr = ctrstr + 5
-        ctract = ctract + 5
+        ctrgood = ctrgood + 5
+        ctrbetter = ctrbetter + 5
+        ctrbest = ctrbest + 5
         ctrwt = ctrwt + 1
     Wend
 
