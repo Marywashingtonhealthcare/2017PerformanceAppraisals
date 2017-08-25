@@ -38,8 +38,7 @@ Sub Click(Source As Button)
     End If
 
     ' User verification to see if they truly want to rest the eval doc
-    askme = ws.Prompt (PROMPT_YESNO,
-    "Update/Changes", "Are you sure you would like to reset the goals and competencies on the linked associates self evaluation document with the changes made to this document?  Click ""Yes"" to Proceed or ""No"" to cancel.")
+    askme = ws.Prompt (PROMPT_YESNO, "Resend/Update Changes", "Are you sure you would like to resend this updated version of the self evaluation?  Click ""Yes"" to Proceed or ""No"" to cancel.")
     If askme = 1 Then
         'Get the self eval doc based on the UNID
         Set selfEval = db.GetDocumentByUNID(findSelfEvalUnid)'
