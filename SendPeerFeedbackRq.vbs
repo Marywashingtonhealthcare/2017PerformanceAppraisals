@@ -1,3 +1,30 @@
+Class Peer
+    Public peerName As String
+    Public peerEmail As String
+    Public peerSetup As String
+    Public peerFlag As String
+    Sub New (pname As String, email As String, setup As String, flag As String)
+        peerName = pname
+        peerEmail = email
+        peerSetup = setup
+        peerFlag = flag
+    End Sub
+End Class
+
+Function NameFieldUpdate(sName As Variant)
+    Dim nn As NotesName
+    Set nn = New NotesName(sName)
+    NameFieldUpdate = nn.Abbreviated
+End Function
+
+Function IsArrayEmpty(parArr As Variant) As Boolean
+    IsArrayEmpty = True
+    Forall v In parArr
+        IsArrayEmpty = False
+        Exit Function
+    End Forall
+End Function
+
 Sub Click(Source As Button)
     Dim s As New NotesSession
     Dim ws As New NotesUIWorkspace
