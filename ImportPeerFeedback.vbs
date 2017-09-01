@@ -23,18 +23,15 @@ Sub Click(Source As Button)
             Call uidoc.FieldAppendText(commFlag(0), "REVIEW DATE:   " & peerdoc.fldRevDate(0))
             Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
             Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
-            Call uidoc.FieldAppendText(commFlag(0), "RATINGS:")'The ratings also need to stay in some capacity.
-            Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
-            Call uidoc.FieldAppendText(commFlag(0), "Quality: " & peerdoc.fldQuality(0))
-            Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
-            Call uidoc.FieldAppendText(commFlag(0), "Service: " & peerdoc.fldService(0))
-            Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
-            Call uidoc.FieldAppendText(commFlag(0), "Teamwork: " & peerdoc.fldService(0))
-            Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
-            Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
-            Call uidoc.FieldAppendText(commFlag(0), "COMMENTS: ")
+            Call uidoc.FieldAppendText(commFlag(0), "Strentghs: ")
             Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
             Forall vals In peerdoc.fldcomments 'Forall loop because the text field is encoded as an array.
+                Call uidoc.FieldAppendText(commFlag(0), vals)
+                Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
+            End Forall
+            Call uidoc.FieldAppendText(commFlag(0), "Opportunities for Improvement: ")
+            Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
+            Forall vals In peerdoc.fldcomments2 'Forall loop because the text field is encoded as an array.
                 Call uidoc.FieldAppendText(commFlag(0), vals)
                 Call uidoc.FieldAppendText(commFlag(0), " " & Chr(13) & Chr(10) & " ")
             End Forall
