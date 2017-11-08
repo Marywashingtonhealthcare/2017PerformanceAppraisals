@@ -104,17 +104,22 @@ Sub Click(Source As Button)
 		emailresult = uidoc.FieldGetText(emailstr)
 		commstr = "peer" + Cstr(counter2) + "Comments"
 		
-        If x.peerName <> "" And x.peerEmail <> "" And x.peerflag = x.peerEmail Then
+		If x.peerName <> "" And x.peerEmail <> "" And x.peerSetup <> "" And x.peerflag = x.peerEmail Then
 			caseResult = "3"  'Run the rest of the code downstream in the Forall loop...
-		Elseif x.peerName <> "" And x.peerEmail <> "" Then
+		Elseif x.peerName <> "" And x.peerEmail <> "" And x.peerSetup <> "" Then
 			caseResult = "4" 'This has already been sent. Throw an error stating they already sent this and it won't be sent again.
-		Elseif  x.peerName = "" And x.peerEmail <> "" Then
+		Elseif  x.peerName = "" And x.peerEmail <> "" And x.peerSetup <> "" Then
 			caseResult = "2" 'Throw an error, with a message stating that they missed something and this won't be sent.
-        Elseif x.peerName <> "" And x.peerEmail = "" Then
+		Elseif x.peerName = "" And x.peerEmail = "" And x.peerSetup <> "" Then
 			caseResult = "2"
-		Elseif x.peerName = "" And x.peerEmail = "" Then
-			caseResult = "1"
-
+		Elseif x.peerName <> "" And x.peerEmail = "" And x.peerSetup = "" Then
+			caseResult = "2"
+		Elseif x.peerName = "" And x.peerEmail <> "" And x.peerSetup = "" Then
+			caseResult = "2"
+		Elseif x.peerName <> "" And x.peerEmail = "" And x.peerSetup <> "" Then
+			caseResult = "2"
+		Elseif x.peerName <> "" And x.peerEmail <> "" And x.peerSetup = "" Then
+			caseResult = "2"
 		Else
 			caseResult = "1" 'Do nothing...go on to the next iteration of the loop.
 		End If
@@ -170,8 +175,14 @@ Sub Click(Source As Button)
 			maildoc.SendTo = email
 			maildoc.Subject = "Peer Review request for " + subtext
 			'body text
-			Call richtext.AppendText("A Manager / Supevisor has requested that you fill out a Peer Review for: " & subtext)
+			Call richtext.AppendText("A Manager / Supevisor has requested that you fill out a Peer Review for " & subtext & " with the following criteria:")
 			Call richtext.AddNewline(2)
+			richStyle.Bold = True
+			Call richtext.AppendStyle(richStyle)
+			Call richtext.AppendText(x.peerSetup)
+			Call richtext.AddNewline(2)
+			richStyle.Bold = False
+			Call richtext.AppendStyle(richStyle)
 			Call richtext.AppendText("Please fill out the Peer Review web form by clicking one of the links below:")
 			Call richtext.AddNewline(2)
 			Call richtext.AppendText("If you are accessing this while AT WORK:")
